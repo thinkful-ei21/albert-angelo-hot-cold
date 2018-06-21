@@ -10,12 +10,18 @@ export default class Game extends React.Component {
         super(props);
 
         this.state = {
-            correctGuess: 90,
+            helpMode: false,
+            correctGuess: 0,
             feedback: 'Click +NEW GAME',
             userGuess: 0,
-            count: 100,
-            guesses: [1,2,3,4]
+            guesses: []
         };
+    }
+
+    toggleHelpMode(helpMode) {
+        this.setState({
+            helpMode
+        })
     }
 
     startGame() {
@@ -42,7 +48,7 @@ export default class Game extends React.Component {
         // compare this.state.userGuess this.state.correctGuess
         if (this.state.userGuess === this.state.correctGuess) {
             this.setState({
-                feedback: 'You won!!!!',
+                feedback: 'You won! Click +NEW GAME to play again!',
             })
         } else if (this.state.userGuess - this.state.correctGuess < 10 && this.state.userGuess - this.state.correctAnser > 0) {
             this.setState({
@@ -63,7 +69,11 @@ export default class Game extends React.Component {
     render() {
         return (
             <div>
-                <Header startGame={() => this.startGame()}/>
+                <Header
+                    startGame={() => this.startGame()}
+                    helpMode={this.state.helpMode}
+                    toggleHelpMode={(helpMode) => this.toggleHelpMode(helpMode)}
+                />
                 <GuessSection
                     setUserGuess={(userGuess) => this.setUserGuess(userGuess)}
                     compareGuess={() => this.compareGuess()}

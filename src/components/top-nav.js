@@ -7,7 +7,7 @@ export default function TopNav(props) {
         <nav>
             <ul className="clearfix">
                 <li>
-                    <a className="what" href="#">
+                    <a className="what" href="#" onClick={() => props.toggleHelpMode(true)}>
                         What?
                     </a>
                 </li>
@@ -20,4 +20,3 @@ export default function TopNav(props) {
         </nav>
     );
 }
-
